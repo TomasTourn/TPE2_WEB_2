@@ -17,12 +17,12 @@ GET /bands/:id 200 -> obtenemos un juego en especifico usando su id(:id).
 POST /bands 201 -> creamos un juego.
 DELETE /bands/:id 200 -> eliminamos un juego usando su id(:id).
 
-PAGINATION
+Paginacion
 
 agregar query params (?) para obtener la solicitud 
 api/games?limit=5&offset=0   (5 y 0 son meros ejemplos)
 
-SORTING
+Ordenamiento
 
 agregar query params (?) para obtener la solicitud 
 order = ASC OR DESC. sort = Columna de la tabla correspondiente a la db. ejemplo: api/games?sort=nombre&order=desc
