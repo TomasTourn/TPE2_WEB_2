@@ -6,7 +6,7 @@
     
             private $db;
 
-            function __construct(){ //start the connection with the db
+            function __construct(){
                 $this->db = $this->connectDB();
             }
             
@@ -26,15 +26,29 @@
             
                 return $juegos;
         }
-        function getGames(){
+        function getGames($sort= null,$order = null,$offset=null,$limit=null){
             
-            
-            $query = $this->db->prepare('SELECT * FROM juego');
-            $query-> execute();
+            if(isset($offset) && isset($limit) && isset($sort) && isset($order)){
+                $query = $this->db->prepare("SELECT * FROM juego ORDER BY $sort $order LIMIT $limit OFFSET $offset");
+                $query-> execute();
+            }
+
+            else if(isset($offset) && isset($limit)){
+                $query = $this->db->prepare("SELECT * FROM juego LIMIT $limit OFFSET $offset");
+                $query-> execute();
+            }
+
+            else if(isset($sort)&& isset($order)){
+                $query = $this->db->prepare("SELECT * FROM juego ORDER BY $sort $order");
+                $query-> execute();
+            }
+            else{
+                $query = $this->db->prepare("SELECT * FROM juego");
+                $query-> execute();
+            }
         
             $juegos  = $query->fetchAll(PDO::FETCH_OBJ);
-        
-        
+    
             return $juegos;
     }
 
